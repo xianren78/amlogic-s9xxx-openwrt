@@ -272,8 +272,8 @@ jobs:
         with:
           go-version: '1.24'
 
-     - name: Verify Go installation
-       run: |
+      - name: Verify Go installation
+        run: |
           go version
           which go
 
