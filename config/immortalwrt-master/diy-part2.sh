@@ -120,7 +120,5 @@ unzip Razord-meta-gh-pages.zip
 mv Razord-meta-gh-pages files/etc/nikki/run/ui/dashboard
 rm Razord-meta-gh-pages.zip
 #
-sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' files/etc/ssh/sshd_config
-
 # ------------------------------- Other ends -------------------------------
 

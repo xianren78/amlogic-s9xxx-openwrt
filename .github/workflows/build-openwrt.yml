@@ -223,6 +223,22 @@ jobs:
           make -j$(($(nproc) + 1)) V=s || make -j1 || make -j1 V=s
           echo "status=success" >> ${GITHUB_OUTPUT}
 
+      - name: Modify sshd_config
+        run: |
+          SSHD_CONFIG=$(find staging_dir/target-*/root-*/etc/ssh -name sshd_config)
+          if [ -f "$SSHD_CONFIG" ]; then
+            if grep -q "PermitRootLogin" "$SSHD_CONFIG"; then
+              sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' "$SSHD_CONFIG"
+            else
+              echo "PermitRootLogin yes" >> "$SSHD_CONFIG"
+            fi
+            echo "Modified $SSHD_CONFIG successfully"
+          else
+            echo "Error: sshd_config not found" >&2
+            exit 1
+          fi
+        if: steps.compile.outputs.status == 'success'
+
       - name: Clear server space
         id: clean
         if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
