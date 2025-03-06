@@ -13,7 +13,7 @@ on:
       openwrt_soc:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "qemu"
         type: choice
         options:
           - all
@@ -54,7 +54,7 @@ on:
       customize_rk3399:
         description: "Set customize rk3399 devices"
         required: false
-        default: "tvi3315a:rk3399-tvi3315a.dtb/sw799:rk3399-bozz-sw799.dtb"
+        default: "TN3399:rk3399-tn3399.dtb"
       openwrt_kernel:
         description: "Select kernel version"
         required: false
@@ -160,8 +160,8 @@ jobs:
         working-directory: /builder
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
-          armvirt_tarfile_repo="ophub/amlogic-s9xxx-openwrt"
-          releases_tag_keywords="OpenWrt_lede_"
+          armvirt_tarfile_repo="xianren78/amlogic-s9xxx-openwrt"
+          releases_tag_keywords="OpenWrt_immortalwrt_"
 
           armvirt_tarfile_path="openwrt/output"
           [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
@@ -234,6 +234,6 @@ jobs:
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
-            - [lede](https://github.com/coolsnowwolf/lede)
+            - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
             ### OpenWrt Image Verification
             - sha256sum
