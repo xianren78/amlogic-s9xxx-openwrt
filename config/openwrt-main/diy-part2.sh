@@ -155,6 +155,12 @@ git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
 git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
 git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
+# FullCone module
+git clone https://github.com/sbwml/nft-fullcone package/new/nft-fullcone
+
+# IPv6 NAT
+git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
+
 # firewall4
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/config/firewall4/Makefile
 mkdir -p package/network/config/firewall4/patches
