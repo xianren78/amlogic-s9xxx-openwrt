@@ -172,7 +172,7 @@ curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/open
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/100-openwrt-firewall4-add-custom-nft-command-support.patch | patch -p1
 # libnftnl
 mkdir -p package/libs/libnftnl/patches
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
+#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
 # nftables
 mkdir -p package/network/utils/nftables/patches
