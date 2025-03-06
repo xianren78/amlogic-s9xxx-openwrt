@@ -181,11 +181,10 @@ mkdir -p package/libs/libnftnl/patches
 #curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
 # nftables
-mkdir -p package/network/utils/nftables/patches
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0003-drop-rej-file.patch > package/network/utils/nftables/patches/0003-drop-rej-file.patch
-rm -rf /builder/openwrt/package/network/utils/nftables/patches/001-drop-useless-file.patch
+#mkdir -p package/network/utils/nftables/patches
+#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
+#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
+#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0003-drop-rej-file.patch > package/network/utils/nftables/patches/0003-drop-rej-file.patch
 
 pushd feeds/luci
     curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/luci-24.10/0001-luci-app-firewall-add-nft-fullcone-and-bcm-fullcone-.patch | patch -p1
