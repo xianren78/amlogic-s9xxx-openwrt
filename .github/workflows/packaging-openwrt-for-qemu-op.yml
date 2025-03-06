@@ -4,7 +4,7 @@
 # Copyright (C) 2021 https://github.com/ophub/flippy-openwrt-actions
 #=====================================================================================
 
-name: Packaging QEMU and TN3399 from immortalwrt
+name: Packaging QEMU and TN3399 from official op
 
 on:
   repository_dispatch:
@@ -161,7 +161,7 @@ jobs:
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           armvirt_tarfile_repo="xianren78/amlogic-s9xxx-openwrt"
-          releases_tag_keywords="OpenWrt_immortalwrt_"
+          releases_tag_keywords="OpenWrt_official_"
 
           armvirt_tarfile_path="openwrt/output"
           [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
@@ -234,6 +234,6 @@ jobs:
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
-            - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
+            - [official](https://github.com/openwrt/openwrt)
             ### OpenWrt Image Verification
             - sha256sum
