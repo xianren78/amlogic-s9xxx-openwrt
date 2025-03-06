@@ -160,10 +160,6 @@ sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/c
 mkdir -p package/network/config/firewall4/patches
 # fix ct status dnat
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/firewall4_patches/990-unconditionally-allow-ct-status-dnat.patch > package/network/config/firewall4/patches/990-unconditionally-allow-ct-status-dnat.patch
-# fullcone
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/firewall4_patches/999-01-firewall4-add-fullcone-support.patch > package/network/config/firewall4/patches/999-01-firewall4-add-fullcone-support.patch
-# bcm fullcone
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/firewall4_patches/999-02-firewall4-add-bcm-fullconenat-support.patch > package/network/config/firewall4/patches/999-02-firewall4-add-bcm-fullconenat-support.patch
 # kernel version
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/firewall4_patches/002-fix-fw4.uc-adept-kernel-version-type-of-x.x.patch > package/network/config/firewall4/patches/002-fix-fw4.uc-adept-kernel-version-type-of-x.x.patch
 # fix flow offload
