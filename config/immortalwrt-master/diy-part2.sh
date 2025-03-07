@@ -166,15 +166,6 @@ curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/open
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/firewall4_patches/001-fix-fw4-flow-offload.patch > package/network/config/firewall4/patches/001-fix-fw4-flow-offload.patch
 # add custom nft command support
 curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/100-openwrt-firewall4-add-custom-nft-command-support.patch | patch -p1
-# libnftnl
-mkdir -p package/libs/libnftnl/patches
-#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
-curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
-# nftables
-#mkdir -p package/network/utils/nftables/patches
-#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
-#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
-#curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/nftables/0003-drop-rej-file.patch > package/network/utils/nftables/patches/0003-drop-rej-file.patch
 
 pushd feeds/luci
     curl -s https://raw.githubusercontent.com/xianren78/r4s_build_script/master/openwrt/patch/firewall4/luci-24.10/0001-luci-app-firewall-add-nft-fullcone-and-bcm-fullcone-.patch | patch -p1
