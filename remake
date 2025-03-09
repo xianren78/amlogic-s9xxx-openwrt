@@ -552,17 +552,23 @@ download_kernel() {
                     kernel_down_from="https://github.com/${kernel_repo}/releases/download/kernel_${key}/${kernel_var}.tar.gz"
                     echo -e "${INFO} (${x}.${i}) [ ${key} - ${kernel_var} ] Kernel download from [ ${kernel_down_from} ]"
 
-                    # Download the kernel files. If the download fails, try again 10 times.
+                    # Download the kernel files, ignore 404 errors
                     [[ -d "${kernel_path}/${key}" ]] || mkdir -p ${kernel_path}/${key}
+                    curl_exit_code=0
                     for t in {1..10}; do
                         curl -fsSL "${kernel_down_from}" -o "${kernel_path}/${key}/${kernel_var}.tar.gz"
-                        [[ "${?}" -eq 0 ]] && break || sleep 60
+                        curl_exit_code="${?}"
+                        [[ "${curl_exit_code}" -eq 0 ]] && break || sleep 60
                     done
-                    [[ "${?}" -eq 0 ]] || error_msg "Failed to download the kernel files from the server."
 
-                    # Decompress the kernel files
-                    tar -mxzf "${kernel_path}/${key}/${kernel_var}.tar.gz" -C "${kernel_path}/${key}"
-                    [[ "${?}" -eq 0 ]] || error_msg "[ ${kernel_var} ] kernel decompression failed."
+                    if [[ "${curl_exit_code}" -eq 0 ]]; then
+                        # Download succeeded, decompress the kernel files
+                        tar -mxzf "${kernel_path}/${key}/${kernel_var}.tar.gz" -C "${kernel_path}/${key}"
+                        [[ "${?}" -eq 0 ]] || error_msg "[ ${kernel_var} ] kernel decompression failed."
+                    else
+                        # Download failed (e.g., 404), log warning and skip
+                        echo -e "${WARNING} (${x}.${i}) Failed to download [ ${key} - ${kernel_var} ] (curl exit code: ${curl_exit_code}), skipping."
+                    fi
                 else
                     echo -e "${INFO} (${x}.${i}) [ ${key} - ${kernel_var} ] Kernel is in the local directory."
                 fi
