@@ -59,7 +59,7 @@ on:
         default: "xianren78/kernel"
         type: choice
         options:
-          - ophub/kernel
+          - xianren78/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
