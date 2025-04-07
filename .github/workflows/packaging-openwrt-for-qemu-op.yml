@@ -4,7 +4,7 @@
 # Copyright (C) 2021 https://github.com/ophub/flippy-openwrt-actions
 #=====================================================================================
 
-name: Packaging QEMU and TN3399 from immortalwrt
+name: Packaging QEMU and TN3399 from official op
 
 on:
   repository_dispatch:
@@ -54,7 +54,7 @@ on:
       customize_rk3399:
         description: "Set customize rk3399 devices"
         required: false
-        default: "TN3399:rk3399-tn3399-v3.dtb"
+        default: "TN3399:rk3399-tn3399.dtb"
       openwrt_kernel:
         description: "Select kernel version"
         required: false
@@ -161,7 +161,7 @@ jobs:
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           armvirt_tarfile_repo="xianren78/amlogic-s9xxx-openwrt"
-          releases_tag_keywords="OpenWrt_immortalwrt_"
+          releases_tag_keywords="OpenWrt_official_"
 
           armvirt_tarfile_path="openwrt/output"
           [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
@@ -188,7 +188,7 @@ jobs:
           curl -fsSL "${latest_url}" -o "${armvirt_tarfile_path}/${openwrt_filename}"
           [[ "${?}" -ne "0" ]] && echo "Invalid OpenWrt rootfs download address." && exit 1
 
-          echo "build_tag=ImmoralWrt_aarch64_${{ inputs.openwrt_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
+          echo "build_tag=OpenWrt_official_aarch64_${{ inputs.openwrt_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Clone packit source code
@@ -234,6 +234,6 @@ jobs:
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
-            - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
+            - [official](https://github.com/openwrt/openwrt)
             ### OpenWrt Image Verification
             - sha256sum
