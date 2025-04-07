@@ -39,13 +39,13 @@ sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/ut
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 
 # mac80211 - 6.14
-rm -rf package/kernel/mac80211
-git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-24.10
-curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/440855ac503c9544d49004c0cf0e2d906698af6f/openwrt/patch/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch > package/kernel/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch
+#rm -rf package/kernel/mac80211
+#git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-24.10
+#curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/440855ac503c9544d49004c0cf0e2d906698af6f/openwrt/patch/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch > package/kernel/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch
 
 # ath10k-ct
-rm -rf package/kernel/ath10k-ct
-git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.14
+#rm -rf package/kernel/ath10k-ct
+#git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.14
 
 # Add luci-app-tailscale
 git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
