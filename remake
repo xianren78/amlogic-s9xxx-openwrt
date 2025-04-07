@@ -552,31 +552,41 @@ download_kernel() {
                     kernel_down_from="https://github.com/${kernel_repo}/releases/download/kernel_${key}/${kernel_var}.tar.gz"
                     echo -e "${INFO} (${x}.${i}) [ ${key} - ${kernel_var} ] Kernel download from [ ${kernel_down_from} ]"
 
-                    # Download the kernel files. If the download fails, try again 10 times.
+                    # Download the kernel files with retry logic
                     [[ -d "${kernel_path}/${key}" ]] || mkdir -p ${kernel_path}/${key}
-                    for t in {1..10}; do
+                    download_success=0
+                    for t in {1..3}; do
                         curl -fsSL "${kernel_down_from}" -o "${kernel_path}/${key}/${kernel_var}.tar.gz"
-                        [[ "${?}" -eq 0 ]] && break || sleep 60
+                        if [[ "${?}" -eq 0 ]]; then
+                            download_success=1
+                            break
+                        fi
+                        sleep 60
                     done
-                    [[ "${?}" -eq 0 ]] || error_msg "Failed to download the kernel files from the server."
 
-                    # Decompress the kernel files
-                    tar -mxzf "${kernel_path}/${key}/${kernel_var}.tar.gz" -C "${kernel_path}/${key}"
-                    [[ "${?}" -eq 0 ]] || error_msg "[ ${kernel_var} ] kernel decompression failed."
+                    if [[ ${download_success} -eq 1 ]]; then
+                        # Decompress the kernel files only if download was successful
+                        tar -mxzf "${kernel_path}/${key}/${kernel_var}.tar.gz" -C "${kernel_path}/${key}"
+                        if [[ "${?}" -ne 0 ]]; then
+                            echo -e "${ERROR} [ ${kernel_var} ] kernel decompression failed, skipping..."
+                            rm -f "${kernel_path}/${key}/${kernel_var}.tar.gz"
+                        else
+                            # If the kernel contains the sha256sums file, check the files integrity
+                            [[ -f "${kernel_path}/${key}/${kernel_var}/sha256sums" ]] && check_kernel "${kernel_path}/${key}/${kernel_var}"
+                        fi
+                    else
+                        echo -e "${ERROR} Failed to download kernel [${kernel_var}] after 10 attempts, skipping..."
+                    fi
                 else
                     echo -e "${INFO} (${x}.${i}) [ ${key} - ${kernel_var} ] Kernel is in the local directory."
                 fi
 
-                # If the kernel contains the sha256sums file, check the files integrity
-                [[ -f "${kernel_path}/${key}/${kernel_var}/sha256sums" ]] && check_kernel "${kernel_path}/${key}/${kernel_var}"
-
+                # Clean up downloaded tar.gz file if it exists
+                rm -f "${kernel_path}/${key}/${kernel_var}.tar.gz"
                 let i++
             done
 
-            # Delete downloaded kernel temporary files
-            rm -f ${kernel_path}/${key}/*.tar.gz
             sync
-
             let x++
         }
     done
